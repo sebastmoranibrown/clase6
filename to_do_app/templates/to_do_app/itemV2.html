@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .red{
+            background-color: red;
+        }
+        .green{
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        {% for item in items %}
+        
+        
+        <li class="{% if item.checked == False %}
+                        red
+                    {% else %}
+                    green
+                    {% endif %}
+        ">
+        <li> {{item.title}}</li>
+        {% if item.checked == False %}
+
+        </li>
+
+            <form action="{%url 'changeStateItem' item.id%}" method="POST">
+                {% csrf_token%}
+                <input type="checkbox" name="checked" id="checked"><label for="">Terminar2</label>
+                <input type="submit" value="Enviar">
+            </form>
+        {% else %}
+            <p>Tarea Terminada</p>
+
+        {% endif %}
+        
+        
+        {% endfor %}
+
+
+    </ul>
+</body>
+</html>
